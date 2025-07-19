@@ -62,3 +62,24 @@ resource "aws_lb_target_group" "test2" {
   protocol = "HTTP"
   vpc_id   = "vpc-05bdcc8880aab85ab"
 }
+resource "aws_launch_template" "foobar" {
+  name   = "test"
+  image_id      = "ami-0f918f7e67a3323f0"
+  instance_type = "t4g.micro"
+}
+
+resource "aws_autoscaling_group" "autoscale" {
+  name                  = "test-autoscaling-group"  
+  availability_zones    = ["ap-south-1"]
+  desired_capacity      = 3
+  max_size              = 6
+  min_size              = 3
+  health_check_type     = "EC2"
+  termination_policies  = ["OldestInstance"]
+ 
+
+  launch_template {
+    id      = aws_launch_template.foobar.id
+    version = "$Latest"
+  }
+}
