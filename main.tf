@@ -30,15 +30,12 @@ data "aws_vpc" "default" {
 }
 
 
-
-
-
 resource "aws_lb" "test" {
   name               = "loadbalancerdemo"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group" "tf_sg.id]
-  subnets            = ["subnet-000d5817b05c45fc2" ,"subnet-0513597d489e87ee9"]
+  security_groups    = [aws_security_group.tf_sg.id]
+  subnets            = ["subnet-0b5fe6746ff2f3430" , "subnet-04fe3b0de658613bc"]
 
   enable_deletion_protection = false
   
