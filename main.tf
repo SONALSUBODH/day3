@@ -38,8 +38,27 @@ resource "aws_lb" "test" {
   subnets            = ["subnet-0b5fe6746ff2f3430" , "subnet-04fe3b0de658613bc"]
 
   enable_deletion_protection = false
-  
   tags = {
     Environment = "production"
   }
+}
+
+
+resource "aws_lb_target_group" "test" {
+  name     = "tf-example-lb-tg"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = "vpc-05bdcc8880aab85ab"
+}
+resource "aws_lb_target_group" "test1" {
+  name     = "tf-example-lb-tg-1"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = "vpc-05bdcc8880aab85ab"
+}
+resource "aws_lb_target_group" "test2" {
+  name     = "tf-example-lb-tg-2"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = "vpc-05bdcc8880aab85ab"
 }
